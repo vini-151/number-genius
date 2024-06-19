@@ -14,8 +14,8 @@
 #define PLAYER_1 2
 #define PLAYER_2 1
 
-int sequence[TAMANHO_MAXIMO_SEQUENCIA];
-int user_input[TAMANHO_MAXIMO_SEQUENCIA];
+int sequence[TAMANHO_MAXIMO_SEQUENCIA]; //sequência de números que será gerada ao longo do jogo
+int user_input[TAMANHO_MAXIMO_SEQUENCIA]; //entradas do usuário
 int tamanhoSequencia = 0;
 int contaRodadas = 0;        // Variável global para contar rodadas
 int jogadorAtual = PLAYER_1; // Inicia com o jogador 1
@@ -31,7 +31,7 @@ void *gerarSequencia(void *arg) {
         sem_wait(&sem_user_ready);
 
         pthread_mutex_lock(&mutex);
-        sequence[tamanhoSequencia] = rand() % 10; // Gera número aleatório entre 0 e 9
+        sequence[tamanhoSequencia] = rand() % 10; // Gera número aleatório entre 0 e 9 e armazena no vetor de sequência
         tamanhoSequencia++;
         contaRodadas++; // Incrementa o contador de rodadas completas
 
@@ -81,7 +81,7 @@ void ultimaChance() {
     }
 
     if (correct) {
-        rintf("Jogador %d está correto! Jogador %d vence o jogo!\n", jogadorAtual, jogadorAtual);
+        printf("Jogador %d está correto! Jogador %d vence o jogo!\n", jogadorAtual, jogadorAtual);
         exit(0);
     }else{
         printf("Ambos jogadores perderam :(\n Tentem novamente!\n");
